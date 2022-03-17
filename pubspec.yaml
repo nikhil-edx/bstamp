@@ -1,0 +1,155 @@
+name: bStamp
+description: bStamp
+publish_to: "" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+3
+
+environment:
+  sdk: ">=2.11.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons. ^4.0.0
+  cupertino_icons: ^1.0.2
+  file_picker: ^4.3.0
+  progress_indicator_button:
+  dotted_border:
+  google_fonts:
+  fluttertoast:
+  shared_preferences:
+  url_launcher:
+  http:
+  crypto:
+  awesome_dialog:
+  intl:
+  footer:
+  #flutter_media_metadata:
+  pretty_qr_code:
+  pdf:
+  path_provider:
+  flutter_launcher_icons:
+  msix: ^2.8.5
+  provider:
+  connectivity_plus:
+  scrollable_positioned_list:
+  socket_io_client:
+  connectivity_plus_macos: ^1.2.0
+  dio:
+  qr_flutter:
+  mime:
+  desktop_drop: ^0.1.1
+  fragment_navigate:
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^1.0.0
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/Images/bstamp_logo.png"
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/Images/edexa_new.png
+    - assets/Images/images.jpg
+    - assets/Images/bstamp_logo.png
+    - assets/Images/logout_button.png
+    - assets/Images/stamp.png
+    - assets/Images/browse.png
+    - assets/Images/addstamp.png
+    - assets/Images/setting.png
+    - assets/Images/delete.png
+    - assets/Images/bStamp.png
+    - assets/Images/bStamp_new.png
+    - assets/Images/Network.png
+    - assets/Images/loginBGImge.png
+    - assets/Images/download-icon.png
+    - assets/Images/json-viewer.png
+    - assets/Images/cancel.png
+    - assets/Images/jsonpath.png
+    - assets/Images/pdfpath.png
+    - assets/Images/viewpath.png
+    - assets/Images/stamp_black.png
+    - assets/Images/stamp_white.png
+    - assets/Images/table_black.png
+    - assets/Images/table_white.png
+    - assets/Images/json.png
+    - assets/Images/bstamp-icon-512.png
+    - assets/Images/electronic.png
+    - assets/Images/signature.png
+    - assets/Images/signMetadata.png
+
+msix_config:
+  display_name: bStamp
+  publisher_display_name: edeXa AG
+  identity_name: edeXaAG.bStamp
+  msix_version: 1.0.4.0
+  # certificate_path: D:\development\flutter\.pub-cache\hosted\pub.dartlang.org\msix-2.1.3\lib\assets\test_certificate.pfx
+  # certificate_password: 1234
+  #dont_install_cert: true CN=AA6A8E46-CF2C-455C-856E-B25F81E52BF4  ./logo/bStamp_windows_256.png #
+  publisher: CN=AA6A8E46-CF2C-455C-856E-B25F81E52BF4 #CN=edeXa AG, O=edeXa AG, C=US
+  logo_path: ./logo/bStamp_windows_256.png # D:\Flutter_projects\bstamp\bstamp-desktop-app\assets\Images\bstamp-icon-512.png
+  start_menu_icon_path: D:\Flutter_projects\bstamp\bstamp-desktop-app\assets\Images\bstamp-icon-512.png
+  tile_icon_path: D:\Flutter_projects\bstamp\bstamp-desktop-app\assets\Images\bstamp-icon-512.png
+  icons_background_color: "#ffffff"
+  store: true
+  #signtool_options: signtool sign /v /fd SHA256 /a /sm D:\development\flutter\.pub-cache\hosted\pub.dartlang.org\msix-2.1.3\lib\assets\test_certificate.pfx /p "1234" D:\Flutter_projects\bstamp\bstamp-desktop-app\build\windows\runner\Release\bStamp.msix
+  #assets_directory_path: C:\Users\Nikhil Deshmukh\Desktop\dllfile
+  # signtool_options: signtool sign /tr http://timestamp.comodoca.com /fd SHA256 "D:/Flutter_projects/bstamp/bstamp-desktop-app/build/windows/runner/Release/bStamp.exe"
+  #signtool_options: C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool sign /debug /a /fd certHash "E44BF643D0559BCD3AABC3ABAF97CB2311FBF293"
+  #signtool_options: SignTool verify /fd SHA256 /a /f "C:/Users/Nikhil Deshmukh/Desktop/dllfile/test_certificate.pfx" /p "1234" "D:/Flutter_projects/bstamp/bstamp-desktop-app/build/windows/runner/Release/bStamp.msix"
+  #signtool_options: C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64>signtool.exe sign/a /fd SHA256 /f C:\Users\Nikhil Deshmukh\Desktop\dllfile\test_certificate.pfx /p "1234" D:/Flutter_projects/bstamp/bstamp-desktop-app/build/windows/runner/Release\bStamp.msix
+  # signtool_options: signtool sign/f "C:/Users/Nikhil Deshmukh/Desktop/dllfile/test_certificate.pfx" /p "1234" /fd SHA1 "D:/Flutter_projects/bstamp/bstamp-desktop-app/build/windows/runner/Release/bStamp.exe"
+  #vs_generated_images_folder_path: C:\<PathToFolder>\icons
+  architecture: x64
+  #capabilities: 'internetClient,location,microphone,webcam'
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.// C:\Users\Nikhil Deshmukh\Desktop\dllfile\test_certificate.pfx
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # fonts:
+  # - family: Schyler
+  #   fonts:
+  #     - asset: fonts/Schyler-Regular.ttf
+  #     - asset: fonts/Schyler-Italic.ttf
+  #       style: italic
+  # - family: Trajan Pro
+  #   fonts:
+  #     - asset: fonts/TrajanPro.ttf
+  #     - asset: fonts/TrajanPro_Bold.ttf
+  #       weight: 700
+  # - family: Lato
+  #   fonts:
+  #     - asset: fonts/Lato-Black.ttf
+  #     - asset: fonts/Lato-Bold.ttf
+  #     - asset: fonts/Lato-Regular.ttf
+  #       weight: 700
+
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

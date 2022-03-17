@@ -1,0 +1,80 @@
+!PrimeState
+dependency_paths: !!set
+  bin/lib: null
+directories: !!set
+  bin: null
+  bin/data: null
+  bin/data/flutter_assets: null
+  bin/data/flutter_assets/assets: null
+  bin/data/flutter_assets/assets/Images: null
+  bin/data/flutter_assets/fonts: null
+  bin/data/flutter_assets/packages: null
+  bin/data/flutter_assets/packages/awesome_dialog: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare: null
+  bin/data/flutter_assets/packages/cupertino_icons: null
+  bin/data/flutter_assets/packages/cupertino_icons/assets: null
+  bin/data/flutter_assets/packages/fluttertoast: null
+  bin/data/flutter_assets/packages/fluttertoast/assets: null
+  bin/lib: null
+files: !!set
+  bin/bstamp: null
+  bin/data/flutter_assets/AssetManifest.json: null
+  bin/data/flutter_assets/FontManifest.json: null
+  bin/data/flutter_assets/NOTICES.Z: null
+  bin/data/flutter_assets/assets/Images/Network.png: null
+  bin/data/flutter_assets/assets/Images/addstamp.png: null
+  bin/data/flutter_assets/assets/Images/bStamp.png: null
+  bin/data/flutter_assets/assets/Images/bStamp_new.png: null
+  bin/data/flutter_assets/assets/Images/browse.png: null
+  bin/data/flutter_assets/assets/Images/bstamp-icon-512.png: null
+  bin/data/flutter_assets/assets/Images/bstamp_logo.png: null
+  bin/data/flutter_assets/assets/Images/cancel.png: null
+  bin/data/flutter_assets/assets/Images/delete.png: null
+  bin/data/flutter_assets/assets/Images/download-icon.png: null
+  bin/data/flutter_assets/assets/Images/edexa_new.png: null
+  bin/data/flutter_assets/assets/Images/electronic.png: null
+  bin/data/flutter_assets/assets/Images/images.jpg: null
+  bin/data/flutter_assets/assets/Images/json-viewer.png: null
+  bin/data/flutter_assets/assets/Images/json.png: null
+  bin/data/flutter_assets/assets/Images/jsonpath.png: null
+  bin/data/flutter_assets/assets/Images/loginBGImge.png: null
+  bin/data/flutter_assets/assets/Images/logout_button.png: null
+  bin/data/flutter_assets/assets/Images/pdfpath.png: null
+  bin/data/flutter_assets/assets/Images/setting.png: null
+  bin/data/flutter_assets/assets/Images/signMetadata.png: null
+  bin/data/flutter_assets/assets/Images/signature.png: null
+  bin/data/flutter_assets/assets/Images/stamp.png: null
+  bin/data/flutter_assets/assets/Images/stamp_black.png: null
+  bin/data/flutter_assets/assets/Images/stamp_white.png: null
+  bin/data/flutter_assets/assets/Images/table_black.png: null
+  bin/data/flutter_assets/assets/Images/table_white.png: null
+  bin/data/flutter_assets/assets/Images/viewpath.png: null
+  bin/data/flutter_assets/fonts/MaterialIcons-Regular.otf: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/error.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/info.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/info2.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/info_without_loop.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/question.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/succes.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/succes_without_loop.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/warning.flr: null
+  bin/data/flutter_assets/packages/awesome_dialog/assets/flare/warning_without_loop.flr: null
+  bin/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf: null
+  bin/data/flutter_assets/packages/fluttertoast/assets/toastify.css: null
+  bin/data/flutter_assets/packages/fluttertoast/assets/toastify.js: null
+  bin/data/flutter_assets/version.json: null
+  bin/data/icudtl.dat: null
+  bin/lib/libapp.so: null
+  bin/lib/libdesktop_drop_plugin.so: null
+  bin/lib/libflutter_linux_gtk.so: null
+  bin/lib/liburl_launcher_linux_plugin.so: null
+primed_stage_packages: !!set {}
+project_options: {}
+properties:
+  override-prime: snapcraftctl prime
+  prime:
+  - '*'
+scriptlet_metadata: !ExtractedMetadata
+  _data: {}
+  common_id_list: []

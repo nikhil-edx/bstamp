@@ -1,0 +1,9 @@
+!GlobalState
+assets:
+  build-packages: []
+  build-snaps:
+  - core18=2284
+  - flutter=111
+  - gnome-3-28-1804=161
+  - gtk-common-themes=1519
+  required-grade: stable

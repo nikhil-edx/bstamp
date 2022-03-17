@@ -1,0 +1,22 @@
+!PrimeState
+dependency_paths: !!set {}
+directories: !!set
+  data-dir: null
+  data-dir/icons: null
+  data-dir/sounds: null
+  data-dir/themes: null
+  gnome-platform: null
+  snap: null
+  snap/command-chain: null
+files: !!set
+  snap/command-chain/desktop-launch: null
+  snap/command-chain/hooks-configure-desktop: null
+primed_stage_packages: !!set {}
+project_options: {}
+properties:
+  override-prime: snapcraftctl prime
+  prime:
+  - '*'
+scriptlet_metadata: !ExtractedMetadata
+  _data: {}
+  common_id_list: []
