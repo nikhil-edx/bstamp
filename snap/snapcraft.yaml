@@ -12,8 +12,8 @@ grade: stable
 # architectures:
 #   - build-on: armhf
 architectures:
-  - build-on: armhf
-    # run-on: amd64
+  - build-on: amd64
+  - build-on: arm64
 system-usernames:
   snap_daemon: shared
 
