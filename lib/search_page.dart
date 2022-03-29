@@ -1,3 +1,4 @@
+// @dart=2.9
 // ignore_for_file: non_constant_identifier_names
 import 'dart:async';
 import 'dart:convert';
@@ -736,7 +737,7 @@ class _SearchPageState extends State<SearchPage> {
     validation >= i
         ? _showValidatMessage()
         : setState(() {
-            for (int i = 0; i < _paths?.length; i++) {
+            for (int i = 0; i< _paths?.length; i++) {
               _fileName =
                   _paths != null ? _paths.map((e) => e.name).toString() : '...';
 

@@ -1,4 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
-    "cmake.sourceDirectory": "${workspaceFolder}/linux"
+    "cmake.sourceDirectory": "${workspaceFolder}/linux",
+    //"dart.flutterTestAdditionalArgs": ["--no-sound-null-safety"],
+    // "dart.flutterAdditionalArgs": ["--no-sound-null-safety"],
+    // "dart.vmAdditionalArgs": ["--no-sound-null-safety"]
 }

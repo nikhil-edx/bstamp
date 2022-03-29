@@ -1,32 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:bStamp/bottom_Navigation/add_stamp.dart';
 import 'package:bStamp/bottom_Navigation/appbar.dart';
 import 'package:crypto/crypto.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_launcher_icons/utils.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
-import 'package:progress_indicator_button/progress_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'dart:convert' as convert;
-
 import 'backend.dart';
 import 'bottom_Navigation/dialog_toast.dart';
 import 'bottom_Navigation/stampeddocument.dart';
-import 'edexa_login.dart';
-import 'login_screen.dart';
-import 'main.dart';
 
 class ValidatePage extends StatefulWidget {
   @override

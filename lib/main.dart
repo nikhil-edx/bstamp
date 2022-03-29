@@ -1,10 +1,9 @@
+// @dart=2.9
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:bStamp/Validate_page.dart';
 import 'package:bStamp/bottom_Navigation/appbar.dart';
-import 'package:flutter/painting.dart';
 import 'backend.dart';
 import 'tabbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,12 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:socket_io_client/socket_io_client.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'edexa_login.dart';
 import 'login_screen.dart';
-import 'search_page.dart';
+
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -30,6 +26,9 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
+  
+
+
   HttpOverrides.global = new MyHttpOverrides();
   runApp(MaterialApp(
           debugShowCheckedModeBanner: false, home: Main() //SearchPage(),

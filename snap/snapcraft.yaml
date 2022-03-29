@@ -1,19 +1,19 @@
 name: bstamp
-version: '1.0.7'
+version: '1.1.3'
 summary: bstamp summary
 description: |
-             bstamp description
-
+             Blockchain to notarize proof of ownership of any digital creation.
+             |
+             bStamp from edeXa Bring attribution, accountability and auditability to your business processes.
 confinement: strict
 base: core18
 grade: stable
-# icon: snap/gui/bstamp.png
+icon: snap/gui/bstamp.png
 
 # architectures:
 #   - build-on: armhf
 architectures:
-  - build-on: armhf
-    # run-on: amd64
+  - build-on: arm64
 system-usernames:
   snap_daemon: shared
 
