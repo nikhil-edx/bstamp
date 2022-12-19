@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bStamp/bottom_Navigation/appbar.dart';
 import 'backend.dart';
+import 'edexa_login.dart';
 import 'tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -14,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'login_screen.dart';
-
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -26,9 +26,6 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
-  
-
-
   HttpOverrides.global = new MyHttpOverrides();
   runApp(MaterialApp(
           debugShowCheckedModeBanner: false, home: Main() //SearchPage(),
@@ -129,15 +126,15 @@ class _TabBarDemoState extends State<TabBarDemo> {
       // ignore: missing_return
     ).then((response) {
       if (response.statusCode == 200) {
+        var jsonResponse = json.decode(response.body);
+        data = jsonResponse['data'];
+
+        preferences.setString('email', jsonResponse['data']['email']);
+        preferences.setString('username', jsonResponse['data']['username']);
+        preferences.setString('token', jsonResponse['data']['token']);
+        _getUserInfo();
         setState(() {
           // ignore: unused_local_variable
-          var jsonResponse = json.decode(response.body);
-          data = jsonResponse['data'];
-
-          preferences.setString('email', jsonResponse['data']['email']);
-          preferences.setString('username', jsonResponse['data']['username']);
-          preferences.setString('token', jsonResponse['data']['token']);
-          _getUserInfo();
         });
       } else {
         var errorMsg = json.decode(response.body);
@@ -486,24 +483,23 @@ class _TabBarDemoState extends State<TabBarDemo> {
     var jsonResponse = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      setState(() {
-        var jsonResponse = jsonDecode(response.body);
-        // ignore: avoid_print
+      var jsonResponse = jsonDecode(response.body);
+      // ignore: avoid_print
 
-        preferences.setString('email', jsonResponse['data']['email']);
-        preferences.setString('username', jsonResponse['data']['username']);
-        preferences.setString(
-            'name',
-            jsonResponse['data']['first_name'] +
-                jsonResponse['data']['last_name']);
-        preferences.setString(
-            'profilePicture', jsonResponse['data']['profilePic']);
-        preferences.setString(
-            "viewType", jsonResponse['data']['viewType'].toString());
-        preferences.setString(
-            "watermark", jsonResponse['data']['watermark'].toString());
-        _getUserInfo();
-      });
+      preferences.setString('email', jsonResponse['data']['email']);
+      preferences.setString('username', jsonResponse['data']['username']);
+      preferences.setString(
+          'name',
+          jsonResponse['data']['first_name'] +
+              jsonResponse['data']['last_name']);
+      preferences.setString(
+          'profilePicture', jsonResponse['data']['profilePic']);
+      preferences.setString(
+          "viewType", jsonResponse['data']['viewType'].toString());
+      preferences.setString(
+          "watermark", jsonResponse['data']['watermark'].toString());
+      _getUserInfo();
+      setState(() {});
     } else {
       var jsonResponse = jsonDecode(response.body);
 

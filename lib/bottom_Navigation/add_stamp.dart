@@ -22,6 +22,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../backend.dart';
+import '../edexa_login.dart';
 import '../main.dart';
 import 'dialog_toast.dart';
 
@@ -204,7 +205,7 @@ class _AddstampState extends State<Addstamp> {
 
           // Dailog_toast().showSuccess(context, myDatat["message"]);
         });
-      } else {
+      }else {
         myDatat = json.decode(response.body);
       }
     });
@@ -421,7 +422,7 @@ class _AddstampState extends State<Addstamp> {
                         selectedPage: 2,
                       )));
         });
-      } else {
+      }else {
         Navigator.of(context, rootNavigator: true).pop();
 
         _clear();
@@ -760,11 +761,10 @@ class _AddstampState extends State<Addstamp> {
                     child: DropTarget(
                       onDragDone: (detail) {
                         setState(() {
-                          final c = detail.urls[0].path;
+                          final c = detail.files[0].path;
                           String d = c.replaceAll("%20", " ");
                           // filename = detail.map((e) => e.name).toList()[0].toString();
-                          final bytes = File("${d}")
-                              .readAsBytesSync();
+                          final bytes = File("${d}").readAsBytesSync();
                           //  filename = c.split("/").last;
                           filename = c.split("/").last.replaceAll("%20", " ");
 
@@ -775,7 +775,7 @@ class _AddstampState extends State<Addstamp> {
                               : print("");
                           String base64Image =
                               "data:$uri;base64," + base64Encode(bytes);
-                          pathhhhhh.add(detail.urls[0].path);
+                          pathhhhhh.add(detail.files[0].path);
 
                           hash(base64Image, filename);
 
@@ -927,6 +927,7 @@ class _AddstampState extends State<Addstamp> {
                                               _scrollController,
                                           //  controller: _controller,
 //reverse: true,
+                                          scrollDirection: Axis.vertical,
                                           itemCount: arr.length, //i,
                                           itemBuilder: (context, index) {
                                             descriptionController.add(

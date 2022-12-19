@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:bStamp/Validate_page.dart';
+import 'package:bStamp/edexa_login.dart';
 import 'package:flutter/gestures.dart';
 import 'package:http/http.dart' as http;
 import 'package:bStamp/search_page.dart';
@@ -42,11 +43,11 @@ class _MainState extends State<Main> {
   void initState() {
     super.initState();
     checkIsLogin();
-_getStampList();
-  
-  Future.delayed(const Duration(seconds:2),(){
-  _getStampList();
-});
+    _getStampList();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _getStampList();
+    });
   }
 
   var token, email, name, username, profilePicture;
@@ -57,25 +58,24 @@ _getStampList();
     token = preferences.getString('token');
 
     if (token != null && token != '') {
-     //  _getStampList();
+      //  _getStampList();
       setState(() {
         token = token;
-  profilePicture = preferences.getString(
-        'profilePicture',
-      );
-           email = preferences.getString(
-        'email',
-      );
-      name = preferences.getString(
-        'name',
-      );
-      username = preferences.getString(
-        'username',
-      );
-    
+        profilePicture = preferences.getString(
+          'profilePicture',
+        );
+        email = preferences.getString(
+          'email',
+        );
+        name = preferences.getString(
+          'name',
+        );
+        username = preferences.getString(
+          'username',
+        );
       });
 
-     // _getUserInfo();
+      // _getUserInfo();
     } else {}
   }
 
@@ -116,8 +116,8 @@ _getStampList();
     if (response.statusCode == 200) {
       setState(() {
         var jsonResponse = jsonDecode(response.body);
-     
-  preferences.setString(
+
+        preferences.setString(
             'profilePicture', jsonResponse['data']['profilePic']);
         preferences.setString('email', jsonResponse['data']['email']);
         preferences.setString('username', jsonResponse['data']['username']);
@@ -126,7 +126,7 @@ _getStampList();
             jsonResponse['data']['first_name'] +
                 " " +
                 jsonResponse['data']['last_name']);
-      
+
         preferences.setString(
             "viewType", jsonResponse['data']['viewType'].toString());
         preferences.setString(
@@ -135,6 +135,8 @@ _getStampList();
             "align", jsonResponse['data']['align'].toString());
         _getUserInfo();
       });
+    } else if (response.statusCode == 401) {
+      expireSession(context);
     } else {
       var jsonResponse = jsonDecode(response.body);
 
@@ -146,24 +148,30 @@ _getStampList();
   static final FragNavigate _fragNav =
       FragNavigate(firstKey: a, drawerContext: null, screens: <Posit>[
     Posit(
-        key: a, title: 'Title A', icon: Icons.settings, fragment: SearchPage()),
+        key: a,
+        title: 'Title A',
+        icon: Icons.settings,
+        fragmentBuilder: (p) => SearchPage()),
     Posit(
         key: b,
         title: 'Title B',
         drawerTitle: 'Diff in B',
         icon: Icons.settings,
-        fragment: TabBarDemo(
-          selectedPage: 0,
-        )),
+        fragmentBuilder: (p) => TabBarDemo(
+              selectedPage: 0,
+            )),
     Posit(
         key: c,
         title: 'Title C',
         icon: Icons.settings,
-        fragment: Container(
-          color: Colors.blueAccent,
-        )),
+        fragmentBuilder: (p) => Container(
+              color: Colors.blueAccent,
+            )),
     Posit(
-        key: d, title: 'Title D', icon: Icons.settings, fragment: Text('qqqq')),
+        key: d,
+        title: 'Title D',
+        icon: Icons.settings,
+        fragmentBuilder: (p) => Text('qqqq')),
   ], actionsList: [
     ActionPosit(keys: [
       a,
@@ -197,7 +205,7 @@ _getStampList();
             return DefaultTabController(
                 length: s.data.bottom?.length ?? 1,
                 child: Scaffold(
-             //  key: UniqueKey(),
+                    //  key: UniqueKey(),
                     //   key: _fragNav.drawerKey,
                     appBar: AppBar(
                       backgroundColor: Color(0xF8F8F8),
@@ -329,10 +337,11 @@ _getStampList();
                                           });
                                         },
                                         child: profilePicture == null
-                                            ? const CircularProgressIndicator()
+                                            ? const AssetImage(
+                                                'assets/Images/user.jpg')
                                             : CircleAvatar(
                                                 backgroundColor:
-                                                    Colors.transparent,
+                                                    Colors.grey[350],
                                                 radius: 20,
                                                 backgroundImage: NetworkImage(
                                                   profilePicture,
@@ -596,29 +605,10 @@ _getStampList();
                                                       onPressed: () async {
                                                         Navigator.pop(
                                                             context, 'Cancel');
-                                                        SharedPreferences
-                                                            prefs =
-                                                            await SharedPreferences
-                                                                .getInstance();
-                                                        prefs.remove('token');
-                                                        prefs
-                                                            .remove('secretId');
-                                                        prefs
-                                                            .remove('secretId');
-                                                        prefs
-                                                            .remove("viewType");
+                                                        expireSession(context);
                                                         // Navigator.pop(
                                                         //     context, 'Cancel');
                                                         //  Navigator.pushNamed(context, "/");
-                                                        Navigator
-                                                            .pushReplacement(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            Main() //SearchPage(), //edexaLogin()
-                                                                    //LoginPage(),
-                                                                    ));
                                                       },
                                                       child: const Text(
                                                         'Logout',

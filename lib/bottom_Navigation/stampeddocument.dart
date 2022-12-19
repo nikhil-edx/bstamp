@@ -14,6 +14,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../backend.dart';
+import '../edexa_login.dart';
 
 class StampedDocument extends StatefulWidget {
   final String id;
@@ -72,14 +73,14 @@ class _StampedDocumentState extends State<StampedDocument> {
         DateTime time1 = DateTime.parse("${data["timestamp"]}");
         var c = time1.toLocal();
         String month = DateFormat('MMMM').format(c);
-       
+
         formattedDate = DateFormat('MMMM dd, yyyy  |  h:mm:ss a').format(c);
         var f = formattedDate.split(",");
-       
+
         ordinal_suffix_of(c.day, month, f[1]);
         // DateFormat('EEE,  dd  MMM  yyyy  |  h:mm:ss a').format(c);
       });
-    } else {
+    }else {
       setState(() {
         val = false;
       });
@@ -92,17 +93,25 @@ class _StampedDocumentState extends State<StampedDocument> {
   ordinal_suffix_of(i, month, f) {
     var j = i % 10, k = i % 100;
     if (j == 1 && k != 11) {
-      return {formattedDate = month + " " + "$i" + "st" + ", " + f,"$i"+"st"};
+      return {
+        formattedDate = month + " " + "$i" + "st" + ", " + f,
+        "$i" + "st"
+      };
     }
     if (j == 2 && k != 12) {
-      return {formattedDate = month + " " + "$i" + "nd" + ", " + f, "$i"+ "nd"};
+      return {
+        formattedDate = month + " " + "$i" + "nd" + ", " + f,
+        "$i" + "nd"
+      };
     }
     if (j == 3 && k != 13) {
-      return {formattedDate = month + " " + "$i" + "rd" + ", " + f, "$i"+ "rd"};
+      return {
+        formattedDate = month + " " + "$i" + "rd" + ", " + f,
+        "$i" + "rd"
+      };
     }
     return {
       formattedDate = month + " " + "$i$suffix" + ", " + f,
-     
     };
   }
 

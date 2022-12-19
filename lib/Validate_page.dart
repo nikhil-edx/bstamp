@@ -17,6 +17,7 @@ import 'dart:convert' as convert;
 import 'backend.dart';
 import 'bottom_Navigation/dialog_toast.dart';
 import 'bottom_Navigation/stampeddocument.dart';
+import 'edexa_login.dart';
 
 class ValidatePage extends StatefulWidget {
   @override
@@ -78,6 +79,8 @@ class _ValidatePageState extends State<ValidatePage> {
             "align", jsonResponse['data']['align'].toString());
         _getUserInfo();
       });
+    }else if (response.statusCode == 401) {
+      expireSession(context);
     } else {
       var jsonResponse = convert.jsonDecode(response.body);
 
@@ -227,7 +230,7 @@ class _ValidatePageState extends State<ValidatePage> {
                         child: DropTarget(
                           onDragDone: (detail) {
                             setState(() {
-                              final c = detail.urls[0].path;
+                              final c = detail.files[0].path;
                               String d = c.replaceFirst("/", "");
 
                               final bytes = File("${d.replaceAll("%20", " ")}")
@@ -552,7 +555,7 @@ class _ValidatePageState extends State<ValidatePage> {
             });
           });
         });
-      } else {
+      }else {
         Navigator.pop(context);
         text = "Drop your file or click here";
       }

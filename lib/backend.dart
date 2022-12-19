@@ -1,8 +1,8 @@
 class Backend {
   static var edexaloginenv = "apiportal.io-world.com";
   static var edexaloginurl = "/users/loginnew";
-  static var baseurl = "apibstamp.edexa.com"; //Live Url
-  //static var baseurl = "apibstamp.io-world.com";//beta url
+  // static var baseurl = "apibstamp.edexa.com"; //Live Url
+  static var baseurl = "apibstamp.io-world.com"; //beta url
   static var download = "/account-preference";
   static var userprofile = "/user-profile";
   static var createstamp = "/hash";

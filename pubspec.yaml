@@ -15,8 +15,8 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons. ^4.0.0
-  cupertino_icons: ^1.0.2
-  file_picker: ^4.3.0
+  cupertino_icons: 
+  file_picker: 
   # file_picker: ^4.5.1
   progress_indicator_button:
   dotted_border:
@@ -34,17 +34,18 @@ dependencies:
   pdf:
   path_provider:
   flutter_launcher_icons:
-  msix: ^2.8.5
+  msix: 
   provider:
   connectivity_plus:
   scrollable_positioned_list:
   socket_io_client:
-  connectivity_plus_macos: ^1.2.0
+  # connectivity_plus: 
   dio:
   qr_flutter:
   mime:
-  desktop_drop: ^0.1.1
+  desktop_drop: 
   fragment_navigate:
+  # connectivity_plus_web:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -29,6 +29,7 @@ import 'backend.dart';
 import 'package:http_parser/http_parser.dart';
 import 'bottom_Navigation/dialog_toast.dart';
 import 'bottom_Navigation/stampeddocument.dart';
+import 'edexa_login.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -41,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
     //  Navigator.of(context).maybePop();
     checkIsLogin();
-   // _getStampList();
+    // _getStampList();
     setpath();
   }
 
@@ -94,26 +95,24 @@ class _SearchPageState extends State<SearchPage> {
     var jsonResponse = convert.jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      setState(() {
-        var jsonResponse = convert.jsonDecode(response.body);
-        // ignore: avoid_print
+      var jsonResponse = convert.jsonDecode(response.body);
+      // ignore: avoid_print
 
-        preferences.setString('email', jsonResponse['data']['email']);
-        preferences.setString('username', jsonResponse['data']['username']);
-        preferences.setString(
-            'name',
-            jsonResponse['data']['first_name'] +
-                jsonResponse['data']['last_name']);
-        preferences.setString(
-            'profilePicture', jsonResponse['data']['profilePic']);
-        preferences.setString(
-            "viewType", jsonResponse['data']['viewType'].toString());
-        preferences.setString(
-            "watermark", jsonResponse['data']['watermark'].toString());
-        preferences.setString(
-            "align", jsonResponse['data']['align'].toString());
-        _getUserInfo();
-      });
+      preferences.setString('email', jsonResponse['data']['email']);
+      preferences.setString('username', jsonResponse['data']['username']);
+      preferences.setString(
+          'name',
+          jsonResponse['data']['first_name'] +
+              jsonResponse['data']['last_name']);
+      preferences.setString(
+          'profilePicture', jsonResponse['data']['profilePic']);
+      preferences.setString(
+          "viewType", jsonResponse['data']['viewType'].toString());
+      preferences.setString(
+          "watermark", jsonResponse['data']['watermark'].toString());
+      preferences.setString("align", jsonResponse['data']['align'].toString());
+      _getUserInfo();
+      setState(() {});
     } else {
       var jsonResponse = convert.jsonDecode(response.body);
 
@@ -272,45 +271,46 @@ class _SearchPageState extends State<SearchPage> {
                           radius: Radius.circular(12),
                           child: DropTarget(
                             onDragEntered: (_) {
-                             // text = "Processing..";
+                              // text = "Processing..";
                             },
                             onDragUpdated: (_) {
-                            //  text = "Processing..";
+                              //  text = "Processing..";
                             },
                             onDragDone: (detail) {
                               Dailog_toast().showAlertDialog(context);
                               int o = 11;
-                              validation = detail.urls.length + hashList.length;
+                              validation =
+                                  detail.files.length + hashList.length;
                               validation >= o
                                   ? _showValidatMessage()
                                   : {
                                       for (int i = 0;
-                                          i < detail.urls.length;
+                                          i < detail.files.length;
                                           i++)
                                         {
                                           setState(() {
-                                            filename = detail.urls[i].path
+                                            filename = detail.files[i].path
                                                 .split('/')
                                                 .last
                                                 .replaceAll("%20", " ");
-                                            filenameList.add(detail.urls[i].path
+                                            filenameList.add(detail
+                                                .files[i].path
                                                 .split('/')
                                                 .last
                                                 .replaceAll("%20", " "));
 
                                             // print(filenameList[i]);
-                                          
-                                            String c = detail.urls[i].path;
-                                         //   String d = c.replaceFirst("/", "");
-                                         String d=c.replaceAll("%20", " ");
-                                            final bytes = File(//"file:///home/edexa/Documents/Untitled document (8).pdf")
-                                                 // "${c.replaceAll("%20", " ")}"
-                                                 d
-                                                  )
-                                                .readAsBytesSync();
+
+                                            String c = detail.files[i].path;
+                                            //   String d = c.replaceFirst("/", "");
+                                            String d = c.replaceAll("%20", " ");
+                                            final bytes = File(
+                                                //"file:///home/edexa/Documents/Untitled document (8).pdf")
+                                                // "${c.replaceAll("%20", " ")}"
+                                                d).readAsBytesSync();
 
                                             uri = lookupMimeType(c);
-                                          //  text = "Processing..";
+                                            //  text = "Processing..";
                                             var file =
                                                 File(d.replaceAll("%20", " "));
                                             int sizeInBytes = file.lengthSync();
@@ -737,7 +737,7 @@ class _SearchPageState extends State<SearchPage> {
     validation >= i
         ? _showValidatMessage()
         : setState(() {
-            for (int i = 0; i< _paths?.length; i++) {
+            for (int i = 0; i < _paths?.length; i++) {
               _fileName =
                   _paths != null ? _paths.map((e) => e.name).toString() : '...';
 
@@ -749,7 +749,7 @@ class _SearchPageState extends State<SearchPage> {
               filenameList.contains(filename)
                   ? print("")
                   : filenameList.add(filename);
-                  
+
               var bytes = File(path).readAsBytesSync();
               uri = lookupMimeType(path);
               String base64Image = "data:$uri;base64," + base64Encode(bytes);
@@ -879,12 +879,11 @@ class _SearchPageState extends State<SearchPage> {
                             // : "f",
 
                             ooo.contains(filenameList[k]) &&
-                                 ooo.contains(".pdf")
+                                    ooo.contains(".pdf")
                                 ? _paths1.contains(p.urls[l].path)
                                     ? {}
                                     : {
-                                        pathhhhhh
-                                            .add(p.urls[l].path),
+                                        pathhhhhh.add(p.urls[l].path),
                                         pathhhhhh = pathhhhhh.toSet().toList()
                                       } //_paths1.add(p[l])
                                 : print(""),
@@ -987,7 +986,7 @@ class _SearchPageState extends State<SearchPage> {
                             // : "f",
 
                             ooo.contains(filenameList[k]) &&
-                                 ooo.contains(".pdf")
+                                    ooo.contains(".pdf")
                                 ? _paths1.contains(_paths[l])
                                     ? {}
                                     : {
@@ -2386,7 +2385,7 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     var c = metaData;
-   
+
     var formData = FormData.fromMap(c);
     formData.files.add(MapEntry(
       'attachments',
@@ -2419,9 +2418,9 @@ class _SearchPageState extends State<SearchPage> {
       if (response.statusCode == 200) {
         Navigator.of(context);
         // Navigator.of(context, rootNavigator: true).pop();
-       
+
         var ab = response.data["data"]["base64"];
-       
+
         var cc = ab.split(",");
         updateAlbum("ok", "");
         Dailog_toast().showSuccess(context, "Document stamped successfully");
@@ -2596,7 +2595,6 @@ class _SearchPageState extends State<SearchPage> {
 
       var ddd = descriptionController[g];
       if (ddd.where((i) => i.text.trim() == "").isNotEmpty) {
-       
         ignoreval2 = false;
       }
     }
@@ -2702,8 +2700,8 @@ class _SearchPageState extends State<SearchPage> {
 
                                               Controller1.text = newValue;
                                               ignoreButton();
-                                            
-                                             // state.didChange(newValue);
+
+                                              // state.didChange(newValue);
                                             });
                                           },
                                           items:

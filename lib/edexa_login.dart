@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:bStamp/login_screen.dart';
 import 'package:http/http.dart' as http;
 //import 'dart:io';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'backend.dart';
+import 'bottom_Navigation/appbar.dart';
 import 'main.dart';
 
 class LoginPage extends StatefulWidget {
@@ -61,24 +63,26 @@ class _LoginPageState extends State<LoginPage> {
     var jsonResponse = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      setState(() {
-        var jsonResponse = jsonDecode(response.body);
+      var jsonResponse = jsonDecode(response.body);
 
-        preferences.setString('email', jsonResponse['data']['email']);
-        preferences.setString('username', jsonResponse['data']['username']);
-        preferences.setString(
-            'name',
-            jsonResponse['data']['first_name'] +
-                " " +
-                jsonResponse['data']['last_name']);
-        preferences.setString(
-            'profilePicture', jsonResponse['data']['profilePic']);
-        preferences.setString(
-            "viewType", jsonResponse['data']['viewType'].toString());
-        preferences.setString(
-            "watermark", jsonResponse['data']['watermark'].toString());
+      preferences.setString('email', jsonResponse['data']['email']);
+      preferences.setString('username', jsonResponse['data']['username']);
+      preferences.setString(
+          'name',
+          jsonResponse['data']['first_name'] +
+              " " +
+              jsonResponse['data']['last_name']);
+      preferences.setString(
+          'profilePicture', jsonResponse['data']['profilePic']);
+      preferences.setString(
+          "viewType", jsonResponse['data']['viewType'].toString());
+      preferences.setString(
+          "watermark", jsonResponse['data']['watermark'].toString());
+      setState(() {
         //  _getUserInfo();
       });
+    } else if (response.statusCode == 401) {
+      expireSession(context);
     } else {
       var jsonResponse = jsonDecode(response.body);
 
@@ -107,14 +111,14 @@ class _LoginPageState extends State<LoginPage> {
         // ignore: missing_return
         .then((response) {
       if (response.statusCode == 200) {
-        setState(() {
-          myData = json.decode(response.body);
+        myData = json.decode(response.body);
 
-          preferences.setString('token', myData['data']['token']);
-          preferences.setString(
-              'username', myData['data']['user_info']['username']);
-          preferences.setString('email', myData['data']['user_info']['email']);
-          _getStampList();
+        preferences.setString('token', myData['data']['token']);
+        preferences.setString(
+            'username', myData['data']['user_info']['username']);
+        preferences.setString('email', myData['data']['user_info']['email']);
+        _getStampList();
+        setState(() {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -156,22 +160,21 @@ class _LoginPageState extends State<LoginPage> {
       // ignore: missing_return
     ).then((response) {
       if (response.statusCode == 200) {
+        // ignore: unused_local_variable
+        var jsonResponse = json.decode(response.body);
+        data = jsonResponse['data'];
+        //  print("main$data");
+        // int ab =
+        //     int.parse(int.parse(jsonResponse['data']['viewType']).toString());
+        //   preferences.setString("viewType", ab.toString());
+        preferences.setString('email', jsonResponse['data']['email']);
+        preferences.setString('username', jsonResponse['data']['username']);
+        preferences.setString('token', jsonResponse['data']['token']);
+        preferences.setString('clientID', emailController.text);
+        preferences.setString('secretId', passwordController.text);
+        preferences.setString(
+            'profilePicture', jsonResponse['data']['profilePicture']);
         setState(() {
-          // ignore: unused_local_variable
-          var jsonResponse = json.decode(response.body);
-          data = jsonResponse['data'];
-          //  print("main$data");
-          // int ab =
-          //     int.parse(int.parse(jsonResponse['data']['viewType']).toString());
-          //   preferences.setString("viewType", ab.toString());
-          preferences.setString('email', jsonResponse['data']['email']);
-          preferences.setString('username', jsonResponse['data']['username']);
-          preferences.setString('token', jsonResponse['data']['token']);
-          preferences.setString('clientID', emailController.text);
-          preferences.setString('secretId', passwordController.text);
-          preferences.setString(
-              'profilePicture', jsonResponse['data']['profilePicture']);
-
           //_getUserInfo();
           Navigator.pushReplacement(
               context,
@@ -585,4 +588,32 @@ class _LoginPageState extends State<LoginPage> {
           );
         });
   }
+}
+
+Future<void> expireSession(BuildContext context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var token = prefs.getString('token');
+
+  if (token == null || token == '') {
+    return;
+  }
+  prefs.remove('token');
+  prefs.remove('secretId');
+  prefs.remove('secretId');
+  prefs.remove("viewType");
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+      content:
+          Text('Your session has expired. You can try again by logging in.'),
+    ),
+  );
+
+  Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => edexaLogin() //SearchPage(), //edexaLogin()
+          //LoginPage(),
+
+          ));
 }

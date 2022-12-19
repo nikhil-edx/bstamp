@@ -15,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../backend.dart';
+import '../edexa_login.dart';
 
 class Account extends StatefulWidget {
   const Account({Key key}) : super(key: key);
@@ -52,26 +53,26 @@ class _AccountState extends State<Account> {
     var jsonResponse = convert.jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      setState(() {
-        var jsonResponse = convert.jsonDecode(response.body);
+      var jsonResponse = convert.jsonDecode(response.body);
 
-        preferences.setString('email', jsonResponse['data']['email']);
-        preferences.setString('username', jsonResponse['data']['username']);
-        preferences.setString(
-            'name',
-            jsonResponse['data']['first_name'] +
-                " " +
-                jsonResponse['data']['last_name']);
-        preferences.setString(
-            'profilePicture', jsonResponse['data']['profilePic']);
-        preferences.setString(
-            "viewType", jsonResponse['data']['viewType'].toString());
-        preferences.setString(
-            "watermark", jsonResponse['data']['watermark'].toString());
-        preferences.setString(
-            "align", jsonResponse['data']['align'].toString());
-        _getUserInfo();
-      });
+      preferences.setString('email', jsonResponse['data']['email']);
+      preferences.setString('username', jsonResponse['data']['username']);
+      preferences.setString(
+          'name',
+          jsonResponse['data']['first_name'] +
+              " " +
+              jsonResponse['data']['last_name']);
+      preferences.setString(
+          'profilePicture', jsonResponse['data']['profilePic']);
+      preferences.setString(
+          "viewType", jsonResponse['data']['viewType'].toString());
+      preferences.setString(
+          "watermark", jsonResponse['data']['watermark'].toString());
+      preferences.setString("align", jsonResponse['data']['align'].toString());
+      _getUserInfo();
+      setState(() {});
+    }else if (response.statusCode == 401) {
+      expireSession(context);
     } else {
       // ignore: unused_local_variable
       var jsonResponse = convert.jsonDecode(response.body);

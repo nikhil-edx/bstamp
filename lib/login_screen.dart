@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'backend.dart';
 import 'bottom_Navigation/stampeddocument.dart';
+import 'edexa_login.dart';
 import 'main.dart';
 import 'search_page.dart';
 
@@ -60,25 +61,27 @@ class edexaLoginState extends State<edexaLogin> {
     var jsonResponse = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      setState(() {
-        var jsonResponse = jsonDecode(response.body);
-        // ignore: avoid_print
+      var jsonResponse = jsonDecode(response.body);
+      // ignore: avoid_print
 
-        preferences.setString('email', jsonResponse['data']['email']);
-        preferences.setString('username', jsonResponse['data']['username']);
-        preferences.setString(
-            'name',
-            jsonResponse['data']['first_name'] +
-                " " +
-                jsonResponse['data']['last_name']);
-        preferences.setString(
-            'profilePicture', jsonResponse['data']['profilePic']);
-        preferences.setString(
-            "viewType", jsonResponse['data']['viewType'].toString());
-        preferences.setString(
-            "watermark", jsonResponse['data']['watermark'].toString());
+      preferences.setString('email', jsonResponse['data']['email']);
+      preferences.setString('username', jsonResponse['data']['username']);
+      preferences.setString(
+          'name',
+          jsonResponse['data']['first_name'] +
+              " " +
+              jsonResponse['data']['last_name']);
+      preferences.setString(
+          'profilePicture', jsonResponse['data']['profilePic']);
+      preferences.setString(
+          "viewType", jsonResponse['data']['viewType'].toString());
+      preferences.setString(
+          "watermark", jsonResponse['data']['watermark'].toString());
+      setState(() {
         //  _getUserInfo();
       });
+    }else if (response.statusCode == 401) {
+      expireSession(context);
     } else {
       var jsonResponse = jsonDecode(response.body);
 
@@ -104,25 +107,25 @@ class edexaLoginState extends State<edexaLogin> {
       // ignore: missing_return
     ).then((response) {
       if (response.statusCode == 200) {
+        var jsonResponse = json.decode(response.body);
+        data = jsonResponse['data'];
+
+        preferences.setString('email', jsonResponse['data']['email']);
+        preferences.setString('username', jsonResponse['data']['username']);
+        preferences.setString('name', jsonResponse['data']['name']);
+        preferences.setString('token', jsonResponse['data']['token']);
+        preferences.setString('clientID', emailController.text);
+        preferences.setString('secretId', passwordController.text);
+        preferences.setString(
+            'profilePicture', jsonResponse['data']['profilePicture']);
+        preferences.setString(
+            "viewType", jsonResponse['data']['viewType'].toString());
+        preferences.setString(
+            "watermark", jsonResponse['data']['watermark'].toString());
+        //_getUserInfo();
+        _getStampList();
         setState(() {
           // ignore: unused_local_variable
-          var jsonResponse = json.decode(response.body);
-          data = jsonResponse['data'];
-
-          preferences.setString('email', jsonResponse['data']['email']);
-          preferences.setString('username', jsonResponse['data']['username']);
-          preferences.setString('name', jsonResponse['data']['name']);
-          preferences.setString('token', jsonResponse['data']['token']);
-          preferences.setString('clientID', emailController.text);
-          preferences.setString('secretId', passwordController.text);
-          preferences.setString(
-              'profilePicture', jsonResponse['data']['profilePicture']);
-          preferences.setString(
-              "viewType", jsonResponse['data']['viewType'].toString());
-          preferences.setString(
-              "watermark", jsonResponse['data']['watermark'].toString());
-          //_getUserInfo();
-          _getStampList();
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Main() //SearchPage()
