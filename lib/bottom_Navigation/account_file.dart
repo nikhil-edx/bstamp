@@ -784,7 +784,7 @@ class _AccountState extends State<Account> {
                           children: [
                             // ignore: avoid_unnecessary_containers
                             SizedBox(
-                              width: 300,
+                              // width: 300,
                               child: DropdownButton<String>(
                                 // elevation: 10,
 
