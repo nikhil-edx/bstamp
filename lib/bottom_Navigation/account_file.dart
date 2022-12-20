@@ -71,7 +71,7 @@ class _AccountState extends State<Account> {
       preferences.setString("align", jsonResponse['data']['align'].toString());
       _getUserInfo();
       setState(() {});
-    }else if (response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       expireSession(context);
     } else {
       // ignore: unused_local_variable
@@ -651,13 +651,123 @@ class _AccountState extends State<Account> {
                         const SizedBox(
                           height: 40,
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Wrap(
+                            alignment: WrapAlignment.start,
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(top: 4.0),
+                                child: Text("Watermark Position",
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w900,
+                                    )),
+                              ),
+                              IconButton(
+                                hoverColor: Colors.transparent,
+                                tooltip:
+                                    "choose the type of position for PDf Watermark",
+                                // "You need to enable this option if you want to add watermark to PDF file. It  will only work with PDF file"
+                                icon: const Icon(
+                                  Icons.info,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {},
+                                color: Colors.blue[200],
+                              ),
+                              const SizedBox(
+                                width: 250,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Radio(
+                                hoverColor: Colors.transparent,
+                                activeColor: Colors.grey,
+                                value: 0,
+                                groupValue: watermarPositionIndex, // id,
+                                onChanged: (val) {
+                                  setState(() {
+                                    //  radioButtonItem = 'ONE';
+                                    Dailog_toast().showAlertDialog(context);
+                                    watermarPositionIndex = 0;
+                                    updateAlbum(viewtypeindex, "top");
+                                  });
+                                },
+                              ),
+                              const Text(
+                                'Top',
+                                style: TextStyle(fontSize: 17.0),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Radio(
+                                hoverColor: Colors.transparent,
+                                activeColor: Colors.grey,
+                                value: 1,
+                                groupValue: watermarPositionIndex, // id,
+                                onChanged: (val) {
+                                  setState(() {
+                                    Dailog_toast().showAlertDialog(context);
+
+                                    //  radioButtonItem = 'TWO';
+                                    watermarPositionIndex = 1;
+                                    updateAlbum(viewtypeindex, "bottom");
+                                  });
+                                },
+                              ),
+                              const Text(
+                                'Bottom',
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Radio(
+                                hoverColor: Colors.transparent,
+                                activeColor: Colors.grey,
+                                value: 2,
+                                groupValue: watermarPositionIndex, //id,
+                                onChanged: (val) {
+                                  setState(() {
+                                    Dailog_toast().showAlertDialog(context);
+                                    watermarPositionIndex = 2;
+
+                                    updateAlbum(viewtypeindex, "none");
+                                  });
+                                },
+                              ),
+                              const Text(
+                                'None',
+                                style: TextStyle(fontSize: 17.0),
+                              ),
+                            ],
+                          ),
+                        ),
+
                         // _switchValue
                         //     ?
-                        Wrap(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(left: 0.0),
-                              child: Padding(
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Wrap(
+                            alignment: WrapAlignment.start,
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            children: [
+                              const Padding(
                                 padding: EdgeInsets.only(top: 4.0),
                                 child: Text(
                                     "Watermark PDF Download Directory Path",
@@ -666,43 +776,17 @@ class _AccountState extends State<Account> {
                                       fontWeight: FontWeight.w900,
                                     )),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 170,
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 4.0),
-                              child: Text("Watermark Position",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w900,
-                                  )),
-                            ),
-                            IconButton(
-                              hoverColor: Colors.transparent,
-
-                              tooltip:
-                                  "choose the type of position for PDf Watermark",
-                              // "You need to enable this option if you want to add watermark to PDF file. It  will only work with PDF file"
-                              icon: const Icon(
-                                Icons.info,
-                                color: Colors.grey,
-                              ),
-                              onPressed: () {},
-                              color: Colors.blue[200],
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                        // : Container(),
-                        // _switchValue
-                        //     ?
+
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.end,
                           // mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             // ignore: avoid_unnecessary_containers
                             Flexible(
-                              fit: FlexFit.loose,
+                              fit: FlexFit.tight,
                               //   flex: 0,
                               child: SizedBox(
                                 width: 300,
@@ -722,7 +806,8 @@ class _AccountState extends State<Account> {
                                       child: Text(
                                         value,
                                         style: const TextStyle(
-                                            color: Colors.black),
+                                            color: Colors.black,
+                                            overflow: TextOverflow.ellipsis),
                                       ),
                                     );
                                   }).toList(),
@@ -737,85 +822,7 @@ class _AccountState extends State<Account> {
                             ),
                             // Spacer(),
                             SizedBox(
-                              width: 280,
-                            ),
-                            Flexible(
-                              fit: FlexFit.loose,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 0.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Radio(
-                                      hoverColor: Colors.transparent,
-                                      activeColor: Colors.grey,
-                                      value: 0,
-                                      groupValue: watermarPositionIndex, // id,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          //  radioButtonItem = 'ONE';
-                                          Dailog_toast()
-                                              .showAlertDialog(context);
-                                          watermarPositionIndex = 0;
-                                          updateAlbum(viewtypeindex, "top");
-                                        });
-                                      },
-                                    ),
-                                    const Text(
-                                      'Top',
-                                      style: TextStyle(fontSize: 17.0),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Radio(
-                                      hoverColor: Colors.transparent,
-                                      activeColor: Colors.grey,
-                                      value: 1,
-                                      groupValue: watermarPositionIndex, // id,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          Dailog_toast()
-                                              .showAlertDialog(context);
-
-                                          //  radioButtonItem = 'TWO';
-                                          watermarPositionIndex = 1;
-                                          updateAlbum(viewtypeindex, "bottom");
-                                        });
-                                      },
-                                    ),
-                                    const Text(
-                                      'Bottom',
-                                      style: TextStyle(
-                                        fontSize: 17.0,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Radio(
-                                      hoverColor: Colors.transparent,
-                                      activeColor: Colors.grey,
-                                      value: 2,
-                                      groupValue: watermarPositionIndex, //id,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          Dailog_toast()
-                                              .showAlertDialog(context);
-                                          watermarPositionIndex = 2;
-
-                                          updateAlbum(viewtypeindex, "none");
-                                        });
-                                      },
-                                    ),
-                                    const Text(
-                                      'None',
-                                      style: TextStyle(fontSize: 17.0),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              width: 170,
                             ),
                           ],
                         ),
