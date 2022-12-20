@@ -51,7 +51,7 @@ class _StampedDocumentState extends State<StampedDocument> {
     // ignore: unused_local_variable
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    var url = Uri.parse("https://${Backend.baseurl}/hash?id=${widget.id}");
+    var url = Uri.parse("https://${Backend.baseurl}/app/hash?id=${widget.id}");
 
     var response = await http.get(
       url,
@@ -80,7 +80,7 @@ class _StampedDocumentState extends State<StampedDocument> {
         ordinal_suffix_of(c.day, month, f[1]);
         // DateFormat('EEE,  dd  MMM  yyyy  |  h:mm:ss a').format(c);
       });
-    }else {
+    } else {
       setState(() {
         val = false;
       });
@@ -504,14 +504,19 @@ class _StampedDocumentState extends State<StampedDocument> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   right: 0.0),
-                                              child: Text(
-                                                data['txid'],
-                                                //  softWrap: false,
-                                                style: const TextStyle(
-                                                    color: Colors.grey,
-                                                    overflow:
-                                                        TextOverflow.visible),
-                                              ),
+                                              child: SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      3,
+                                                  // flex: 2,
+                                                  child: Text(
+                                                    data['txid'],
+                                                    style: const TextStyle(
+                                                        color: Colors.grey,
+                                                        overflow: TextOverflow
+                                                            .visible),
+                                                  )),
                                             ),
                                             //  ),
                                             Spacer(),
