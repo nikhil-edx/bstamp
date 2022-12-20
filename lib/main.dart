@@ -15,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'login_screen.dart';
+import 'package:window_size/window_size.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -26,6 +27,17 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('My App');
+    setWindowMinSize(const Size(1280, 780));
+    Future<Null>.delayed(Duration(seconds: 1), () {
+      setWindowFrame(
+          Rect.fromCenter(center: Offset.infinite, width: 1280, height: 780));
+    });
+  }
+
   HttpOverrides.global = new MyHttpOverrides();
   runApp(MaterialApp(
           debugShowCheckedModeBanner: false, home: Main() //SearchPage(),

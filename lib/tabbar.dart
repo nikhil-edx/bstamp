@@ -167,7 +167,6 @@ class _TabBarScreenState extends State<TabBarScreen> {
                       tabs: [
                         Tab(
                           height: 65,
-                        
                           iconMargin:
                               const EdgeInsets.only(top: 20, bottom: 20),
                           child: Row(
@@ -182,7 +181,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                                 "Add Stamp",
                                 style: TextStyle(
                                     color: Color(0xFF868686),
-                                    fontSize: 17,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               )
                             ],
@@ -230,7 +229,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                                   style: TextStyle(
                                     color: Color(0xFF868686),
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 17,
+                                    fontSize: 16,
                                   ),
                                 )
                               ],
@@ -251,7 +250,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                                 "My Account",
                                 style: TextStyle(
                                     color: Color(0xFF868686),
-                                    fontSize: 17,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               )
                             ],
@@ -272,7 +271,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                                 "My Plan",
                                 style: TextStyle(
                                     color: Color(0xFF868686),
-                                    fontSize: 17,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               )
                             ],

@@ -45,6 +45,10 @@ dependencies:
   mime:
   desktop_drop: 
   fragment_navigate:
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding
+      path: plugins/window_size
   # connectivity_plus_web:
 dev_dependencies:
   flutter_test:

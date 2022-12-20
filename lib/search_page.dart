@@ -1016,6 +1016,8 @@ class _SearchPageState extends State<SearchPage> {
       } else {
         Navigator.pop(context);
         text = "Drop your file or click here";
+        var errormsg = json.decode(response.body);
+        Dailog_toast().showError(context, errormsg["message"]);
       }
     });
   }
