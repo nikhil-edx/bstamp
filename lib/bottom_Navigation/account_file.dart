@@ -766,8 +766,8 @@ class _AccountState extends State<Account> {
                           child: Wrap(
                             alignment: WrapAlignment.start,
                             crossAxisAlignment: WrapCrossAlignment.start,
-                            children: [
-                              const Padding(
+                            children: const [
+                              Padding(
                                 padding: EdgeInsets.only(top: 4.0),
                                 child: Text(
                                     "Watermark PDF Download Directory Path",
@@ -781,47 +781,42 @@ class _AccountState extends State<Account> {
                         ),
 
                         Row(
-                          // crossAxisAlignment: CrossAxisAlignment.end,
-                          // mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             // ignore: avoid_unnecessary_containers
-                            Flexible(
-                              fit: FlexFit.tight,
-                              //   flex: 0,
-                              child: SizedBox(
-                                width: 300,
-                                child: DropdownButton<String>(
-                                  elevation: 10,
+                            SizedBox(
+                              width: 300,
+                              child: DropdownButton<String>(
+                                // elevation: 10,
 
-                                  // ignore: prefer_if_null_operators
-                                  value: Dirpath == null ? dir : Dirpath,
-                                  items: <String>[
-                                    '$dir',
-                                    '$dir1',
-                                    // '$dir2',
-                                    // '$dir3'
-                                  ].map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                        value,
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            overflow: TextOverflow.ellipsis),
-                                      ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      Dirpath = value;
-                                    });
-                                    setpath(value);
-                                  },
-                                ),
+                                // ignore: prefer_if_null_operators
+                                value: Dirpath == null ? dir : Dirpath,
+                                items: <String>[
+                                  '$dir',
+                                  '$dir1',
+                                  // '$dir2',
+                                  // '$dir3'
+                                ].map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          overflow: TextOverflow.ellipsis),
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    Dirpath = value;
+                                  });
+                                  setpath(value);
+                                },
                               ),
                             ),
+
                             // Spacer(),
-                            SizedBox(
+                            const SizedBox(
                               width: 170,
                             ),
                           ],
@@ -872,7 +867,7 @@ class _AccountState extends State<Account> {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            launch("https://portal.edexa.com/apis");
+                            launch(Backend.web_api_doc_url);
                             // "https://portal.edexa.com/apis/api-detail/api-explorer/38");
                             //launch("https://accounts.io-world.com/profile");//betaurl
                           },
