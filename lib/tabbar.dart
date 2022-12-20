@@ -166,7 +166,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                           ),
                       tabs: [
                         Tab(
-                          height: 65,
+                          height: 70,
                           iconMargin:
                               const EdgeInsets.only(top: 20, bottom: 20),
                           child: Row(
@@ -188,7 +188,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                           ),
                         ),
                         Tab(
-                          height: 65,
+                          height: 70,
                           iconMargin:
                               const EdgeInsets.only(top: 20, bottom: 20),
                           child: Row(
@@ -197,7 +197,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                             children: [
                               Image.asset("assets/Images/signature.png"),
                               const SizedBox(
-                                width: 9,
+                                width: 5,
                               ),
                               const Text(
                                 "Electronic Signature",
@@ -210,7 +210,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                           ),
                         ),
                         Tab(
-                          height: 65,
+                          height: 70,
                           // icon: Image.asset("assets/Images/browse.png"),
                           // text: "Browse",
 
@@ -237,7 +237,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                           ),
                         ),
                         Tab(
-                          height: 65,
+                          height: 70,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -257,7 +257,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                           ),
                         ),
                         Tab(
-                          height: 65,
+                          height: 70,
                           // iconMargin: EdgeInsets.all(10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
