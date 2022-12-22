@@ -2,7 +2,7 @@ name: bStamp
 description: bStamp
 publish_to: "" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+3
+version: 1.0.1+1
 analyzer:
   enable-experiment:
     - non-nullable
@@ -110,14 +110,16 @@ msix_config:
   display_name: bStamp
   publisher_display_name: edeXa AG
   identity_name: edeXaAG.bStamp
-  msix_version: 1.0.4.0
+  msix_version: 1.0.5.0
+  app_installer: #<-- app installer configuration
+    publish_folder_path: D:\edexa projects\Flutter\bStamp\New\bstamp\build\windows\runner
   # certificate_path: D:\development\flutter\.pub-cache\hosted\pub.dartlang.org\msix-2.1.3\lib\assets\test_certificate.pfx
   # certificate_password: 1234
   #dont_install_cert: true CN=AA6A8E46-CF2C-455C-856E-B25F81E52BF4  ./logo/bStamp_windows_256.png #
   publisher: CN=AA6A8E46-CF2C-455C-856E-B25F81E52BF4 #CN=edeXa AG, O=edeXa AG, C=US
-  logo_path: ./logo/bStamp_windows_256.png # D:\Flutter_projects\bstamp\bstamp-desktop-app\assets\Images\bstamp-icon-512.png
-  start_menu_icon_path: D:\Flutter_projects\bstamp\bstamp-desktop-app\assets\Images\bstamp-icon-512.png
-  tile_icon_path: D:\Flutter_projects\bstamp\bstamp-desktop-app\assets\Images\bstamp-icon-512.png
+  logo_path: .\logo\bStamp_windows_256.png # D:\Flutter_projects\bstamp\bstamp-desktop-app\assets\Images\bstamp-icon-512.png
+  start_menu_icon_path: .\assets\Images\bstamp-icon-512.png
+  tile_icon_path: .\assets\Images\bstamp-icon-512.png
   icons_background_color: "#ffffff"
   store: true
   #signtool_options: signtool sign /v /fd SHA256 /a /sm D:\development\flutter\.pub-cache\hosted\pub.dartlang.org\msix-2.1.3\lib\assets\test_certificate.pfx /p "1234" D:\Flutter_projects\bstamp\bstamp-desktop-app\build\windows\runner\Release\bStamp.msix

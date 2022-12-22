@@ -11,15 +11,12 @@ class Backend {
 
 
   //Beta
-  // static var baseurl = "apibstamp.edexa.com"; //Live Url
-  static var baseurl = "apibstamp.io-world.com"; //beta url
-  static var edexaloginenv = "apiportal.io-world.com";
-  static var web_api_doc_url = "https://universe.io-world.com/apis/explorer/38";
+  // static var baseurl = "apibstamp.io-world.com"; //beta url
+  // static var web_api_doc_url = "https://universe.io-world.com/apis/explorer/38";
 
   //Live
-  // static var baseurl = "apibstamp.edexa.com"; //beta url
-  // static var edexaloginenv = "apiportal.edexa.com";
-  // static var web_api_doc_url = "https://universe.io-world.com/apis/explorer/38";
+  static var baseurl = "apibstamp.edexa.com"; //beta url
+  static var web_api_doc_url = "https://universe.edexa.com/apis/explorer/38";
 
 }
 
