@@ -32,10 +32,10 @@ void main() {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('My App');
     setWindowMinSize(const Size(1280, 780));
-    Future<Null>.delayed(Duration(seconds: 1), () {
-      setWindowFrame(
-          Rect.fromCenter(center: Offset.infinite, width: 1280, height: 780));
-    });
+    // Future<Null>.delayed(Duration(seconds: 1), () {
+    //   setWindowFrame(
+    //       Rect.fromCenter(center: Offset.infinite, width: 1280, height: 780));
+    // });
   }
 
   HttpOverrides.global = new MyHttpOverrides();

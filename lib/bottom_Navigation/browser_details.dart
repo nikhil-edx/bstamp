@@ -498,7 +498,7 @@ class _DataTableExampleState extends State<DataTableExample> {
                                                 "${_searchResult[index].createdAt}");
                                             var c = time1.toLocal();
                                             String formattedDate = DateFormat(
-                                                    ' dd/MM/yyyy  |  h:mm:ss a'
+                                                    ' dd/MM/yyyy   h:mm:ss a'
                                                     //  'EEE,  dd  MMM  yyyy  |  h:mm a'
                                                     )
                                                 .format(c);
@@ -815,7 +815,7 @@ class _DataTableExampleState extends State<DataTableExample> {
                                             "${data[index]["createdAt"]}");
                                         var c = time1.toLocal();
                                         String formattedDate = DateFormat(
-                                                ' dd/MM/yyyy  |  h:mm:ss a'
+                                                ' dd/MM/yyyy   h:mm:ss a'
                                                 // 'EEE,  dd  MMM  yyyy  |  h:mm a'
                                                 )
                                             .format(c);

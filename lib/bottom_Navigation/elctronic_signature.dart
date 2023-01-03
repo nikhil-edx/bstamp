@@ -18,6 +18,7 @@
 import 'dart:typed_data';
 
 //import 'package:path/path.dart';
+import 'package:bStamp/bottom_Navigation/stampeddocument.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http_parser/http_parser.dart';
@@ -433,7 +434,7 @@ class _Electronic_SignatureState extends State<Electronic_Signature> {
                         selectedPage: 1,
                       )));
         });
-      }else {
+      } else {
         Navigator.of(context, rootNavigator: true).pop();
 
         _clear();
@@ -726,6 +727,7 @@ class _Electronic_SignatureState extends State<Electronic_Signature> {
   bool a = false;
   int i = 0;
   final _height = 80;
+  bool isToggled = true;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -835,6 +837,94 @@ class _Electronic_SignatureState extends State<Electronic_Signature> {
                         ],
                       ),
                     )),
+                const SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Electronic Signature",
+                  style: GoogleFonts.lato(
+                      textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                      // fontStyle: FontStyle.normal,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                RichText(
+                  text: const TextSpan(
+                    children: [
+                      TextSpan(
+                          text: "Note:",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      TextSpan(
+                          text:
+                              " The file stamp feature will be enabled for any type of file.",
+                          style: TextStyle(color: Colors.grey))
+                    ],
+                  ),
+                ),
+                Switch(
+                  hoverColor: Colors.transparent,
+                  value: true, //_switchValue,
+                  inactiveTrackColor:
+                      const Color(0xffff073D83).withOpacity(0.5),
+                  inactiveThumbColor: const Color(0xffff073D83),
+                  onChanged: (value) {
+                    showError(context, "Coming Soon!!!");
+                  },
+                  activeTrackColor: const Color(0xffff073D83).withOpacity(0.5),
+                  activeColor: const Color(0xffff073D83),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 0.0, bottom: 10),
+                  child: Text(
+                    "Blockchain Settings",
+                    style: GoogleFonts.lato(
+                        textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                        // fontStyle: FontStyle.normal,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 0.0, bottom: 0),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          const TextSpan(
+                              text: "Note: ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey)),
+                          TextSpan(
+                              text: isToggled == true
+                                  ? "Disable to stamp your file on public Blockchain (Your file will be stamped in public Blockchain)"
+                                  : "Enable to stamp your file on private Blockchain (Your file will be stamped in private Blockchain)",
+                              style: TextStyle(color: Colors.grey)),
+                        ],
+                      ),
+                    )),
+                Switch(
+                  hoverColor: Colors.transparent,
+                  value: true, //_switchValue,
+                  inactiveTrackColor:
+                      const Color(0xffff073D83).withOpacity(0.5),
+                  inactiveThumbColor: const Color(0xffff073D83),
+                  onChanged: (value) {
+                    showError(context, "Coming Soon!!!");
+                  },
+                  activeTrackColor: const Color(0xffff073D83).withOpacity(0.5),
+                  activeColor: const Color(0xffff073D83),
+                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -974,46 +1064,6 @@ class _Electronic_SignatureState extends State<Electronic_Signature> {
                         )),
                 SizedBox(
                   height: filename == null ? 0 : 40,
-                ),
-                Text(
-                  "Electronic Signature",
-                  style: GoogleFonts.lato(
-                      textStyle: const TextStyle(fontWeight: FontWeight.bold),
-                      // fontStyle: FontStyle.normal,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.black),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                RichText(
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                          text: "Note:",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      TextSpan(
-                          text:
-                              " The file stamp feature will be enabled for any type of file.",
-                          style: TextStyle(color: Colors.grey))
-                    ],
-                  ),
-                ),
-                Switch(
-                  hoverColor: Colors.transparent,
-                  value: true, //_switchValue,
-                  inactiveTrackColor:
-                      const Color(0xffff073D83).withOpacity(0.5),
-                  inactiveThumbColor: const Color(0xffff073D83),
-                  // onChanged: (value) {
-
-                  // },
-                  activeTrackColor: const Color(0xffff073D83).withOpacity(0.5),
-                  activeColor: const Color(0xffff073D83),
                 ),
                 const SizedBox(
                   height: 20,

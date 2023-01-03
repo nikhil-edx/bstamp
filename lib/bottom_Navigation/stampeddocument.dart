@@ -74,7 +74,7 @@ class _StampedDocumentState extends State<StampedDocument> {
         var c = time1.toLocal();
         String month = DateFormat('MMMM').format(c);
 
-        formattedDate = DateFormat('MMMM dd, yyyy  |  h:mm:ss a').format(c);
+        formattedDate = DateFormat('MMMM dd, yyyy   h:mm:ss a').format(c);
         var f = formattedDate.split(",");
 
         ordinal_suffix_of(c.day, month, f[1]);
@@ -173,7 +173,7 @@ class _StampedDocumentState extends State<StampedDocument> {
                       child: Text(
                     "Stamped Document",
                     style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.w900,
                         color: Colors.black),
                   )),
@@ -216,7 +216,7 @@ class _StampedDocumentState extends State<StampedDocument> {
                                       height: 10,
                                     ),
                                     const Text(
-                                      "Your stamp is invalid. Please recheck the Hash/File or the shortcode which you have searched.",
+                                      "Your stamp is invalid. Please recheck the Hash/Shortcode or File which you have searched.",
                                       style: TextStyle(fontSize: 16),
                                     )
                                   ],
@@ -329,10 +329,10 @@ class _StampedDocumentState extends State<StampedDocument> {
                                           // ),
                                           title: const Padding(
                                             padding: const EdgeInsets.all(10.0),
-                                            child: Text("Document Hash Imprint",
+                                            child: Text("Document hash",
                                                 style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: 22,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Colors.black)),
                                           ),
                                           subtitle: Column(
@@ -386,14 +386,35 @@ class _StampedDocumentState extends State<StampedDocument> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10.0),
-                                                child: Text(
-                                                  "A document named ${data['filename']} has been stamped via our service on the Blockchain.",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                ),
-                                              )
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      // Note: Styles for TextSpans must be explicitly defined.
+                                                      // Child text spans will inherit styles from parent
+                                                      style: TextStyle(
+                                                        fontSize: 15.0,
+                                                        color: Colors
+                                                            .grey.shade700,
+                                                      ),
+                                                      children: <TextSpan>[
+                                                        TextSpan(
+                                                            text:
+                                                                'The document named '),
+                                                        TextSpan(
+                                                            text:
+                                                                "${data['filename']} ",
+                                                            style: const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        TextSpan(
+                                                            text:
+                                                                "has been stamped via our service on the blockchain."),
+                                                      ],
+                                                    ),
+                                                  ))
                                             ],
                                           ),
                                           isThreeLine: true,
@@ -406,21 +427,25 @@ class _StampedDocumentState extends State<StampedDocument> {
                               const SizedBox(
                                 height: 40,
                               ),
-                              const ListTile(
-                                leading: Text(
-                                  " File Information",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.black),
-                                ),
-                              ),
+                              const Padding(
+                                  padding: EdgeInsets.only(left: 10, bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "File Information",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.black),
+                                    ),
+                                  )),
                               Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: Colors.grey, width: 1),
+                                          color: Colors.grey.shade400,
+                                          width: 1),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))),
                                   child: Padding(
@@ -646,8 +671,7 @@ class _StampedDocumentState extends State<StampedDocument> {
                                               child: Container(
                                                   width: 250,
                                                   child: Text(
-                                                      "Validate Transaction"
-                                                          .toUpperCase(),
+                                                      "STORED ON".toUpperCase(),
                                                       style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.w900,
@@ -661,13 +685,16 @@ class _StampedDocumentState extends State<StampedDocument> {
                                                 //  flex: 2,
                                                 child: InkWell(
                                               onTap: () {
-                                                launch(
-                                                    'https://explorer.edexa.com/search/${data['txid']}');
+                                                // launch(
+                                                //     'https://explorer.edexa.com/search/${data['txid']}');
                                               },
-                                              child: const Text(
-                                                  "https://explorer.edexa.com/",
-                                                  style: TextStyle(
-                                                      color: Colors.green)),
+                                              child: Text(
+                                                  data['isPrivateBc'] as bool ==
+                                                          true
+                                                      ? "Private Blockchain"
+                                                      : "Public Blockchain",
+                                                  style: const TextStyle(
+                                                      color: Colors.grey)),
                                             ))
                                           ],
                                         ),
@@ -676,18 +703,22 @@ class _StampedDocumentState extends State<StampedDocument> {
                                   ),
                                 ),
                               ),
+
                               meta.length == 0
                                   ? Container()
-                                  : const ListTile(
-                                      leading: Text(
-                                        "Meta Information",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w900,
-                                            color: Colors.black),
-                                      ),
-                                    ),
-
+                                  : const Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 10, top: 25, bottom: 5),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Meta Information",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.black),
+                                        ),
+                                      )),
                               meta.length == 0
                                   ? Container()
                                   : Padding(
@@ -695,7 +726,8 @@ class _StampedDocumentState extends State<StampedDocument> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                                color: Colors.grey, width: 1),
+                                                color: Colors.grey.shade400,
+                                                width: 1),
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(10))),
@@ -709,7 +741,11 @@ class _StampedDocumentState extends State<StampedDocument> {
                                                     separatorBuilder:
                                                         (BuildContext context,
                                                                 int index) =>
-                                                            Divider(height: 1),
+                                                            Divider(
+                                                              height: 0,
+                                                              color: Colors
+                                                                  .transparent,
+                                                            ),
                                                     scrollDirection:
                                                         Axis.vertical,
                                                     shrinkWrap: true,
@@ -749,7 +785,13 @@ class _StampedDocumentState extends State<StampedDocument> {
                                                               ))
                                                             ],
                                                           ),
-                                                          //  Divider()
+                                                          // Divider()
+                                                          index !=
+                                                                  _metaList1
+                                                                          .length -
+                                                                      1
+                                                              ? const Divider()
+                                                              : SizedBox(),
                                                         ],
                                                       );
                                                     }),
@@ -760,22 +802,26 @@ class _StampedDocumentState extends State<StampedDocument> {
                                       ),
                                     ),
 
-                              const ListTile(
-                                leading: Text(
-                                  "Owner Information",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.black),
-                                ),
-                              ),
-
+                              const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 10, top: 25, bottom: 5),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Owner Information",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.black),
+                                    ),
+                                  )),
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: Colors.grey, width: 1),
+                                          color: Colors.grey.shade400,
+                                          width: 1),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))),
                                   child: Padding(
@@ -792,8 +838,7 @@ class _StampedDocumentState extends State<StampedDocument> {
                                                 child: Container(
                                                     width: 250,
                                                     child: Text(
-                                                        "Owner name"
-                                                            .toUpperCase(),
+                                                        "Name".toUpperCase(),
                                                         style: const TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w900,
@@ -804,9 +849,9 @@ class _StampedDocumentState extends State<StampedDocument> {
                                                 width: 20,
                                               ),
                                               SizedBox(
-                                                  child: Text(
-                                                data["username"],
-                                              )),
+                                                  child: Text(data["username"],
+                                                      style: const TextStyle(
+                                                          color: Colors.grey))),
                                               const SizedBox(
                                                 width: 20,
                                               ),
@@ -956,98 +1001,6 @@ class _StampedDocumentState extends State<StampedDocument> {
       ],
     );
   }
-
-  void showSuccess(BuildContext context, String message,
-      {bool shouldDismiss = true}) {
-    Timer.run(() => _showAlert(
-        context,
-        message,
-        // Colors.blue,
-        const Color(0xFFE2F8FF),
-        CupertinoIcons.check_mark_circled_solid,
-        const Color(0xffff073D83),
-        //Color.fromRGBO(91, 180, 107, 1),
-        shouldDismiss));
-  }
-
-  void showInfo(BuildContext context, String message,
-      {bool shouldDismiss = true}) {
-    Timer.run(() => _showAlert(context, message, Color(0xFFE7EDFB),
-        Icons.info_outline, Color.fromRGBO(54, 105, 214, 1), shouldDismiss));
-  }
-
-  void showError(BuildContext context, String message,
-      {bool shouldDismiss = true}) {
-    Timer.run(() => _showAlert(context, message, const Color(0xFFFDE2E1),
-        Icons.error_outline, Colors.red, shouldDismiss));
-  }
-
-  void _showAlert(BuildContext context, String message, Color color,
-      IconData icon, Color iconColor, bool shouldDismiss) {
-    showGeneralDialog(
-        context: context,
-        barrierDismissible: false,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        transitionDuration: const Duration(milliseconds: 10),
-        pageBuilder: (BuildContext buildContext, Animation animation,
-            Animation secondaryAnimation) {
-          if (shouldDismiss) {
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.of(context, rootNavigator: true).pop();
-            });
-          }
-          return Material(
-            type: MaterialType.transparency,
-            child: WillPopScope(
-              onWillPop: () async => false,
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(bottom: 100, right: 50, left: 50),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: iconColor, width: 1),
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(10),
-                              bottom: Radius.circular(10)),
-                          color: Colors.white),
-                      width: MediaQuery.of(context).size.width / 12,
-                      height: MediaQuery.of(context).size.height / 16,
-                      padding: const EdgeInsets.all(5),
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            icon,
-                            size: 30,
-                            color: iconColor,
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Flexible(
-                            child: Text(
-                              message,
-                              style: const TextStyle(
-                                  decoration: TextDecoration.none,
-                                  fontSize: 16,
-                                  color: Colors.black),
-                            ),
-                          )
-                        ],
-                      )),
-                ),
-              ),
-            ),
-          );
-        });
-  }
 }
 
 //  meta.length == 0
@@ -1057,3 +1010,95 @@ class _StampedDocumentState extends State<StampedDocument> {
 //                                                 _list(_metaList1.length)
 //                                               ],
 //                                             ),
+
+void showSuccess(BuildContext context, String message,
+    {bool shouldDismiss = true}) {
+  Timer.run(() => _showAlert(
+      context,
+      message,
+      // Colors.blue,
+      const Color(0xFFE2F8FF),
+      CupertinoIcons.check_mark_circled_solid,
+      const Color(0xffff073D83),
+      //Color.fromRGBO(91, 180, 107, 1),
+      shouldDismiss));
+}
+
+void showInfo(BuildContext context, String message,
+    {bool shouldDismiss = true}) {
+  Timer.run(() => _showAlert(context, message, Color(0xFFE7EDFB),
+      Icons.info_outline, Color.fromRGBO(54, 105, 214, 1), shouldDismiss));
+}
+
+void showError(BuildContext context, String message,
+    {bool shouldDismiss = true}) {
+  Timer.run(() => _showAlert(context, message, const Color(0xFFFDE2E1),
+      Icons.error_outline, Colors.red, shouldDismiss));
+}
+
+void _showAlert(BuildContext context, String message, Color color,
+    IconData icon, Color iconColor, bool shouldDismiss) {
+  showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      transitionDuration: const Duration(milliseconds: 10),
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        if (shouldDismiss) {
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.of(context, rootNavigator: true).pop();
+          });
+        }
+        return Material(
+          type: MaterialType.transparency,
+          child: WillPopScope(
+            onWillPop: () async => false,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 100, right: 50, left: 50),
+              child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Expanded(
+                    child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: iconColor, width: 1),
+                            shape: BoxShape.rectangle,
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(10),
+                                bottom: Radius.circular(10)),
+                            color: Colors.white),
+                        width: 200,
+
+                        // height: MediaQuery.of(context).size.height / 16,
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              icon,
+                              size: 20,
+                              color: iconColor,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Flexible(
+                              child: Text(
+                                message,
+                                style: const TextStyle(
+                                    decoration: TextDecoration.none,
+                                    fontSize: 16,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        )),
+                  )),
+            ),
+          ),
+        );
+      });
+}

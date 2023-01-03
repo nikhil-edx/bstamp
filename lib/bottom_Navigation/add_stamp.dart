@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 
 //import 'package:path/path.dart';
+import 'package:bStamp/bottom_Navigation/stampeddocument.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http_parser/http_parser.dart';
@@ -25,6 +26,7 @@ import '../backend.dart';
 import '../edexa_login.dart';
 import '../main.dart';
 import 'dialog_toast.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 class Addstamp extends StatefulWidget {
   const Addstamp({Key key}) : super(key: key);
@@ -205,7 +207,7 @@ class _AddstampState extends State<Addstamp> {
 
           // Dailog_toast().showSuccess(context, myDatat["message"]);
         });
-      }else {
+      } else {
         myDatat = json.decode(response.body);
       }
     });
@@ -387,7 +389,7 @@ class _AddstampState extends State<Addstamp> {
       Map<String, String> map = {label[i]: desc[i]};
     }
     Map<String, dynamic> metaData = new Map<String, dynamic>();
-    metaData = {'type': "3"};
+    metaData = {'type': "3", 'isPrivate': isToggled};
     for (int i = 0; i < label.length; i++) {
       label[i].contains("watermark") && desc[i].contains("bottom") ||
               desc[i].contains("top")
@@ -422,7 +424,7 @@ class _AddstampState extends State<Addstamp> {
                         selectedPage: 2,
                       )));
         });
-      }else {
+      } else {
         Navigator.of(context, rootNavigator: true).pop();
 
         _clear();
@@ -724,6 +726,8 @@ class _AddstampState extends State<Addstamp> {
   bool a = false;
   int i = 0;
   final _height = 80;
+  bool isToggled = true;
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -832,6 +836,51 @@ class _AddstampState extends State<Addstamp> {
                         ],
                       ),
                     )),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 0.0, bottom: 10),
+                  child: Text("Blockchain Settings",
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black)),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 0.0, bottom: 10),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          const TextSpan(
+                              text: "Note: ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey)),
+                          TextSpan(
+                              text: isToggled == true
+                                  ? "Disable to stamp your file on public Blockchain (Your file will be stamped in public Blockchain)"
+                                  : "Enable to stamp your file on private Blockchain (Your file will be stamped in private Blockchain)",
+                              style: TextStyle(color: Colors.grey)),
+                        ],
+                      ),
+                    )),
+                Padding(
+                  padding: EdgeInsets.only(left: 0.0, bottom: 10),
+                  child: Switch(
+                    hoverColor: Colors.transparent,
+                    value: true, //_switchValue,
+                    inactiveTrackColor:
+                        const Color(0xffff073D83).withOpacity(0.5),
+                    inactiveThumbColor: const Color(0xffff073D83),
+                    onChanged: (value) {
+                      showError(context, "Coming Soon!!!");
+                    },
+                    activeTrackColor:
+                        const Color(0xffff073D83).withOpacity(0.5),
+                    activeColor: const Color(0xffff073D83),
+                  ),
+                ),
                 const SizedBox(
                   height: 30,
                 ),

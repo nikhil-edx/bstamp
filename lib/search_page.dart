@@ -220,7 +220,7 @@ class _SearchPageState extends State<SearchPage> {
                                       ),
                                     ));
                               },
-                              style: const TextStyle(fontSize: 25),
+                              style: const TextStyle(fontSize: 30),
                               cursorColor: Colors.black,
                               controller: searchbar,
                               decoration: const InputDecoration(
@@ -250,7 +250,7 @@ class _SearchPageState extends State<SearchPage> {
                           )),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 50),
                       const Center(
                         child: Text(
                           "OR",
@@ -258,7 +258,7 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ),
                       //_divider(),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 50),
                       Padding(
                         padding: const EdgeInsets.only(
                             bottom: 20.0, left: 5.0, right: 5.0),

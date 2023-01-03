@@ -79,7 +79,7 @@ class _ValidatePageState extends State<ValidatePage> {
             "align", jsonResponse['data']['align'].toString());
         _getUserInfo();
       });
-    }else if (response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       expireSession(context);
     } else {
       var jsonResponse = convert.jsonDecode(response.body);
@@ -178,7 +178,7 @@ class _ValidatePageState extends State<ValidatePage> {
                                     }
                                   },
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 25),
+                                    style: TextStyle(fontSize: 100),
                                     cursorColor: Colors.black,
                                     controller: searchbar,
                                     decoration: const InputDecoration(
@@ -555,7 +555,7 @@ class _ValidatePageState extends State<ValidatePage> {
             });
           });
         });
-      }else {
+      } else {
         Navigator.pop(context);
         text = "Drop your file or click here";
       }
