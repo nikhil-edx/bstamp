@@ -42,10 +42,10 @@ class _LoginPageState extends State<LoginPage> {
     controller.reset();
   }
 
-  Future<bool> saveData() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return await preferences.setString('token', myData['data']["app_token"]);
-  }
+  // Future<bool> saveData() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   return await preferences.setString('token', "Bearer " + myData['data']["app_token"]);
+  // }
 
   _getStampList() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
 
   updateAlbum() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var url = Uri.parse("https://apiaccounts.io-world.com/auth/login");
+    var url = Uri.parse("https://${Backend.accountsBaseurl}/auth/login");
     final http.Response response = await http
         .post(
       url,
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
       if (response.statusCode == 200) {
         myData = json.decode(response.body);
 
-        preferences.setString('token', myData['data']['token']);
+        preferences.setString('token', "Bearer " + myData['data']['token']);
         preferences.setString(
             'username', myData['data']['user_info']['username']);
         preferences.setString('email', myData['data']['user_info']['email']);
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
   Future _Authkey() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    var url = Uri.parse("https://apibstamp.io-world.com/authenticate");
+    var url = Uri.parse("https://${Backend.accountsBaseurl}/authenticate");
     final http.Response response = await http.post(
       url,
       headers: <String, String>{
@@ -169,7 +169,8 @@ class _LoginPageState extends State<LoginPage> {
         //   preferences.setString("viewType", ab.toString());
         preferences.setString('email', jsonResponse['data']['email']);
         preferences.setString('username', jsonResponse['data']['username']);
-        preferences.setString('token', jsonResponse['data']['token']);
+        preferences.setString(
+            'token', "Bearer " + jsonResponse['data']['token']);
         preferences.setString('clientID', emailController.text);
         preferences.setString('secretId', passwordController.text);
         preferences.setString(

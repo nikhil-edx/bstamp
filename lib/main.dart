@@ -143,7 +143,7 @@ class _TabBarDemoState extends State<TabBarDemo> {
 
         preferences.setString('email', jsonResponse['data']['email']);
         preferences.setString('username', jsonResponse['data']['username']);
-        preferences.setString('token', jsonResponse['data']['token']);
+        preferences.setString('token', "Bearer " + jsonResponse['data']['token']);
         _getUserInfo();
         setState(() {
           // ignore: unused_local_variable

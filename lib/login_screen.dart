@@ -113,7 +113,7 @@ class edexaLoginState extends State<edexaLogin> {
         preferences.setString('email', jsonResponse['data']['email']);
         preferences.setString('username', jsonResponse['data']['username']);
         preferences.setString('name', jsonResponse['data']['name']);
-        preferences.setString('token', jsonResponse['data']['token']);
+        preferences.setString('token', "Bearer " + jsonResponse['data']['token']);
         preferences.setString('clientID', emailController.text);
         preferences.setString('secretId', passwordController.text);
         preferences.setString(
